@@ -2,9 +2,50 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 // import { DB_NAME } from './constants';
- import express from 'express';
 import connectDB from './db/db.js';
-const app=express();
+import app from './app.js';
+dotenv.config({
+    path:'./env'
+})
+//Approach-2
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT || 8000,()=>{
+        console.log(`Server is running on ${process.env.PORT}`)
+    });
+})
+.catch((error)=>{
+    console.log(error);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Always wrap try catch when connecting with database
 //Always use async await as database connection takes time
 //APPROACH-1 (CONNECTION OF DB):-(USING IIFE)
@@ -23,8 +64,3 @@ const app=express();
 //         throw error;
 //     }
 // })()
-dotenv.config({
-    path:'./env'
-})
-//Approach-2
-connectDB();
